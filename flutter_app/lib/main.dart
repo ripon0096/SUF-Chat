@@ -306,4 +306,4 @@ void showWallet(BuildContext context) => showModalBottomSheet(context: context, 
   Text('Design preview balances only — not live account data.', style: TextStyle(color: muted, fontSize: 12)), SizedBox(height: 18),
   Row(children: [Expanded(child: _Balance(icon: Icons.monetization_on, title: 'Gold Coins', value: '10.2K', color: gold)), SizedBox(width: 8), Expanded(child: _Balance(icon: Icons.diamond, title: 'Diamonds', value: '250', color: cyan)), SizedBox(width: 8), Expanded(child: _Balance(icon: Icons.circle, title: 'Rubies', value: '80', color: Color(0xFFFF668D)))]),
   SizedBox(height: 20),
-])));
+]))));
