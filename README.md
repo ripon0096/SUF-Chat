@@ -1,166 +1,73 @@
-# Voice Chat App - Gaming & Gifting Platform 🎮
+# SUF-Chat / MEMORY Party — Flutter UI Prototype
 
-Real-time voice chat app with gaming, gifting, and live broadcasting features.
+This repository contains a Flutter Android UI prototype for a social voice-party app concept, including a dark violet theme, room cards, a 10-seat room layout, profile/wallet mock screens, gift selection, and game entry previews.
 
-## 📁 Project Structure
+## Current status
 
+**UI prototype — not a production-ready voice/chat/payment app.**
+
+Implemented in the current Flutter UI:
+- Home and Explore layouts with sample room cards
+- Messages screen with sample conversations
+- Profile screen with sample level and wallet balances
+- Voice-room screen with a 10-seat visual layout and local UI controls
+- Gift and game selection preview panels
+- Dark violet / indigo visual theme
+
+Not yet implemented or production-verified:
+- Real-time voice audio
+- Real user accounts/authentication
+- Persistent direct messages
+- Real live room state and user presence
+- Secure wallet balances, purchases, gift settlement, or payments
+- Multiplayer game engines
+- Production backend hosting, authentication, authorization, and database persistence
+
+The Node.js backend in `backend/` is a small demonstration server with in-memory sample data. It is not production-safe and does not transmit voice audio.
+
+## Project layout
+
+- `flutter_app/` — Flutter mobile UI
+- `backend/` — sample Express + Socket.IO server
+- `BUILD_APK.md` — local APK build instructions
+- `flutter_app/BUILD_APK_WINDOWS.ps1` — Windows local build helper
+- `ANTIGRAVITY_HANDOFF.md` — instructions for Gemini Anti-Gravity
+
+## Build a debug APK on Windows
+
+From the repository root, run PowerShell:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\flutter_app\BUILD_APK_WINDOWS.ps1
 ```
-voice-chat-app/
-├── backend/                 # Node.js + Socket.io Server
-│   ├── server.js           # Main backend server
-│   ├── package.json        # Node dependencies
-│   └── .gitignore
-│
-├── flutter_app/            # Flutter Mobile Application
-│   ├── lib/
-│   │   ├── main.dart       # Complete UI & Logic
-│   │   └── screens/
-│   ├── pubspec.yaml        # Flutter dependencies
-│   └── android/            # Android build config
-│
-└── README.md
+
+Expected APK:
+
+`flutter_app\build\app\outputs\flutter-apk\app-debug.apk`
+
+You need a working Flutter SDK, Java JDK, Android SDK, and Android SDK licenses accepted. The script can regenerate missing Android platform scaffold files using your installed Flutter SDK, then run dependency resolution, analysis, and a local debug build.
+
+Manual commands:
+
+```powershell
+cd flutter_app
+flutter doctor -v
+flutter pub get
+flutter analyze
+flutter build apk --debug
 ```
 
-## ✨ Features
+## Backend demo (optional)
 
-✅ **Real-time Voice Chat** - Socket.io powered live communication
-✅ **10-Seat Gaming Layout** - King seat + 9 user seats
-✅ **Gift Distribution System** - 40/20/10/5% split logic
-✅ **Game Integration** - Ludo, Teen Patti, Carrom, Domino
-✅ **Live Broadcast Marquee** - Real-time event notifications
-✅ **User Wallet System** - Gold, Diamonds, Rubies currencies
-✅ **Direct Messaging** - User-to-user communication
-✅ **Block User Feature** - Control interactions
-✅ **Self-Gifting Support** - Users can gift to any seat
-✅ **Room Reward Pool** - Collective earnings tracking
-
-## 🚀 Quick Start
-
-### Backend Setup
-
-```bash
+```powershell
 cd backend
 npm install
 npm start
 ```
 
-Backend runs on `http://localhost:3000`
+The demo server starts on port 3000 and uses sample in-memory data. It is not connected to a deployed production environment. The Flutter client needs a reachable backend URL before network features can work on a real phone.
 
-### Flutter App Setup
+## Before production release
 
-```bash
-cd flutter_app
-flutter pub get
-flutter run
-```
-
-## 📱 Build APK
-
-```bash
-cd flutter_app
-flutter build apk --release
-```
-
-**APK Location:** `flutter_app/build/app/outputs/flutter-apk/app-release.apk`
-
-## 🔧 Backend API Endpoints
-
-### Socket.io Events
-
-- **join_room** - User joins a voice chat room
-- **send_gift** - Send gift with automatic distribution
-- **game_win** - Broadcast game victory
-- **lucky_bag** - Lucky bag opened event
-
-### REST API
-
-```
-GET  /                    - Test endpoint
-GET  /api/users           - Get all users
-POST /api/exchange-ruby   - Convert Ruby to Gold (1:1)
-```
-
-## 💰 Gift Distribution Logic
-
-When a user sends a gift worth X coins:
-- **Receiver:** 40% Diamonds + 20% Rubies
-- **Agency:** 10% Diamonds
-- **Room Pool:** 5% Rubies
-- **Platform:** 25% (implicit)
-
-## 🔐 User Wallet
-
-```javascript
-{
-  "name": "King Rahul",
-  "gold": 10000,      // Spending currency
-  "diamonds": 0,      // Premium currency from gifts
-  "rubies": 0         // Exchange currency
-}
-```
-
-## 📚 Room Features
-
-- **King Seat** - Premium position (Seat 1)
-- **User Seats** - Seats 2-10
-- **Live Marquee** - Real-time event broadcasts
-- **Voice Controls** - Mute, Speaker on/off
-- **Message Box** - Live chat in room
-- **Game Launcher** - Play mini-games during stream
-
-## 🎮 Supported Games
-
-1. Ludo Classic
-2. Teen Patti VIP
-3. Carrom Master
-4. Domino King
-
-## 🔄 Data Flow
-
-```
-User Action (Gift Send)
-         ↓
-   Socket.io Event
-         ↓
-   Backend Processing
-         ↓
-   Update User Wallets
-         ↓
-   Broadcast to Room
-         ↓
-   Display in Live Marquee
-```
-
-## 📦 Dependencies
-
-### Backend
-- `express` - Web framework
-- `socket.io` - Real-time communication
-- `cors` - Cross-origin support
-
-### Frontend
-- `flutter` - UI framework
-- `socket_io_client` - Socket.io client for Flutter
-
-## 🚢 Deployment
-
-For production deployment:
-1. Update backend URL in `flutter_app/lib/main.dart`
-2. Deploy backend to cloud (Heroku, AWS, Railway, etc.)
-3. Build release APK
-4. Publish to Google Play Store
-
-## 📝 Development Notes
-
-- Default backend URL: `http://localhost:3000`
-- Update socket URL for production deployments
-- Ensure CORS is properly configured
-- Test WebSocket connectivity before deployment
-
-## 📧 Support
-
-For issues or questions, create a GitHub issue.
-
----
-
-**Happy Coding!** 🚀
+Implement and test the real voice SDK, authentication, database, message delivery, backend authorization, wallet transaction integrity, abuse prevention, privacy disclosures, release signing, and Play Store compliance. Do not treat mock balances or UI-only buttons as real transactions.
